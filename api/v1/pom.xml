@@ -39,8 +39,8 @@
             <artifactId>kumuluzee-cors</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.kumuluz.ee.rest</groupId>
-            <artifactId>kumuluzee-rest-core</artifactId>
+            <groupId>com.kumuluz.ee.graphql</groupId>
+            <artifactId>kumuluzee-graphql</artifactId>
         </dependency>
         <dependency>
             <groupId>com.kumuluz.ee.health</groupId>
@@ -61,10 +61,6 @@
         <dependency>
             <groupId>com.kumuluz.ee.openapi</groupId>
             <artifactId>kumuluzee-openapi-ui</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee.fault.tolerance</groupId>
-            <artifactId>kumuluzee-fault-tolerance-smallrye</artifactId>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
