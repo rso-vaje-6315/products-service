@@ -6,12 +6,14 @@ import si.rso.products.persistence.ProductEntity;
 import si.rso.products.services.ProductService;
 import si.rso.rest.exceptions.NotFoundException;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ApplicationScoped
 public class ProductServiceImpl implements ProductService {
 
     @PersistenceContext(unitName = "main-jpa-unit")
