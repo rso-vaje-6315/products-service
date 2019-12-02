@@ -5,8 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "products")
 @NamedQueries(value = {
-        @NamedQuery(name = ProductEntity.FIND_ALL, query = "SELECT s FROM ProductEntity p")
-        , @NamedQuery(name = ProductEntity.FIND_BY_CATEGORY, query = "SELECT s FROM ProductEntity p WHERE p.category = :category")
+        @NamedQuery(name = ProductEntity.FIND_ALL, query = "SELECT p FROM ProductEntity p")
+        , @NamedQuery(name = ProductEntity.FIND_BY_CATEGORY, query = "SELECT p FROM ProductEntity p WHERE p.category = :category")
 })
 public class ProductEntity extends BaseEntity {
 
