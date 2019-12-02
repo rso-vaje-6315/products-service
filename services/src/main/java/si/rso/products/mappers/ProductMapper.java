@@ -13,6 +13,6 @@ public class ProductMapper {
         product.setVisible(entity.isVisible());
         product.setCategory(CategoryMapper.fromCategoryEntity(entity.getCategory()));
 
-        return new Product();
+        return product;
     }
 }

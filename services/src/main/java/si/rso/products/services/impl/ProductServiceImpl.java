@@ -23,6 +23,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProducts() {
         TypedQuery<ProductEntity> query = em.createNamedQuery(ProductEntity.FIND_ALL, ProductEntity.class);
 
+
         return query.getResultStream()
                 .map(ProductMapper::fromProductEntity)
                 .collect(Collectors.toList());
