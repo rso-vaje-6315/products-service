@@ -2,6 +2,7 @@ package si.rso.products.api.endpoints;
 
 import com.kumuluz.ee.graphql.annotations.GraphQLClass;
 import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import si.rso.products.lib.Product;
 import si.rso.products.services.ProductService;
@@ -29,16 +30,21 @@ public class ProductEndpoint {
         return productService.getProduct(productId);
     }
 
-//    @GraphQLMutation
-////    @RolesAllowed("admin")
-//    public Customer addNewCustomer(@GraphQLArgument(name="customer") Customer customer) {
-//        customerBean.saveCustomer(customer);
-//        return customer;
-//    }
-//
-//    @GraphQLMutation
-////    @DenyAll
-//    public void deleteCustomer(@GraphQLArgument(name="customerId") String customerId) {
-//        customerBean.deleteCustomer(customerId);
-//    }
+    //    @RolesAllowed("admin")
+    @GraphQLMutation
+    public Product createProduct(@GraphQLArgument(name = "product") Product product) {
+        return productService.createProduct(product);
+    }
+
+    //    @RolesAllowed("admin")
+    @GraphQLMutation
+    public Product updateProduct(@GraphQLArgument(name = "product") Product product) {
+        return productService.updateProduct(product);
+    }
+
+    //    @RolesAllowed("admin")
+    @GraphQLMutation
+    public Product deleteProduct(@GraphQLArgument(name = "productId") String productId) {
+        return productService.deleteProduct(productId);
+    }
 }

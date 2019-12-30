@@ -17,4 +17,17 @@ public class ProductMapper {
 
         return product;
     }
+
+    public static ProductEntity toProductEntity(Product product) {
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setId(product.getId());
+        productEntity.setTimestamp(product.getTimestamp());
+        productEntity.setName(product.getName());
+        productEntity.setDescription(product.getDescription());
+        productEntity.setPrice(product.getPrice());
+        productEntity.setVisible(product.isVisible());
+        productEntity.setCategory(CategoryMapper.toCategoryEntity(product.getCategory()));
+
+        return productEntity;
+    }
 }

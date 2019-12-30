@@ -9,4 +9,10 @@ public interface ProductService {
     List<Product> getProducts();
 
     Product getProduct(String productId);
+
+    Product createProduct(Product product);
+
+    Product updateProduct(Product product);
+
+    Product deleteProduct(String productId);
 }

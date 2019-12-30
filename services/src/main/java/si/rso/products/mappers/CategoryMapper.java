@@ -16,4 +16,17 @@ public class CategoryMapper {
 
         return category;
     }
+
+    public static CategoryEntity toCategoryEntity(Category category) {
+        CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setId(category.getId());
+        categoryEntity.setTimestamp(category.getTimestamp());
+        categoryEntity.setName(category.getName());
+
+        if (category.getParentCategory() != null) {
+            categoryEntity.setParentCategory(CategoryMapper.toCategoryEntity(category.getParentCategory()));
+        }
+
+        return categoryEntity;
+    }
 }

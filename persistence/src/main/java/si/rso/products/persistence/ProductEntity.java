@@ -1,5 +1,8 @@
 package si.rso.products.persistence;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,11 +20,12 @@ public class ProductEntity extends BaseEntity {
 
     private String description;
 
-    private int price;
+    private float price;
 
     private boolean visible;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "category", referencedColumnName = "id")
     private CategoryEntity category;
 
@@ -41,11 +45,11 @@ public class ProductEntity extends BaseEntity {
         this.description = description;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
