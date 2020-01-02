@@ -12,6 +12,8 @@ public class Product extends BaseType {
 
     private Category category;
 
+    private String imagePath;
+
     public String getName() {
         return name;
     }
@@ -50,5 +52,13 @@ public class Product extends BaseType {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

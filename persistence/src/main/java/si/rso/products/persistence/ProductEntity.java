@@ -29,6 +29,9 @@ public class ProductEntity extends BaseEntity {
     @JoinColumn(name = "category", referencedColumnName = "id")
     private CategoryEntity category;
 
+    @Column(name = "image_path")
+    private String imagePath;
+
     public String getName() {
         return name;
     }
@@ -67,5 +70,13 @@ public class ProductEntity extends BaseEntity {
 
     public void setCategory(CategoryEntity category) {
         this.category = category;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
