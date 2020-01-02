@@ -54,3 +54,7 @@ kumuluzee:
       auth-server-url: https://keycloak.mjamsek.com/auth
       client-id: products-service
       client-secret: not_set
+  graphql:
+    ui:
+      mapping: /graphiql
+      enabled: true

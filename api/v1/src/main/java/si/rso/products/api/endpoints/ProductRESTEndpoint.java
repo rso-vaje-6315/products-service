@@ -26,6 +26,12 @@ public class ProductRESTEndpoint {
 //    protected UriInfo uriInfo;
 
     @GET
+//    @Operation(description = "Retrieves accounts that match query.",
+//            summary = "Returns account infos.", tags = "account",
+//            responses = {
+//                    @ApiResponse(responseCode = "200", description = "Returns accounts.",
+//                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = Product.class))))
+//            })
     public Response getProducts() {
         List<Product> products = productService.getProducts();
 

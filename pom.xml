@@ -121,6 +121,11 @@
                 <artifactId>kumuluzee-graphql</artifactId>
                 <version>${kumuluzee-graphql.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.kumuluz.ee.graphql</groupId>
+                <artifactId>kumuluzee-graphql-ui</artifactId>
+                <version>${kumuluzee-graphql.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
