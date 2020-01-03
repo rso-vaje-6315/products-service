@@ -1,13 +1,29 @@
 package si.rso.products.api;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+import si.rso.products.api.config.AuthRole;
+import si.rso.products.api.endpoints.ProductRESTEndpoint;
+
+import javax.annotation.security.DeclareRoles;
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 
 @ApplicationPath("/v1")
-//@OpenAPIDefinition(
-//        info = @Info(title = "Customer service", version = "1.0.0", contact = @Contact(name = "Miha Jamsek"),
-//                description = "Orchestration service for integration with Keycloak server.")
-//)
-public class RestService extends Application {
+@DeclareRoles({AuthRole.SERVICE, AuthRole.ADMIN, AuthRole.SELLER, AuthRole.CUSTOMER})
+@OpenAPIDefinition(
+        info = @Info(title = "Products service", version = "1.0.0", contact = @Contact(name = "Matej Bizjak"),
+                description = "Service for working with product entity.")
+)
+public class RestService extends ResourceConfig {
 
+    public RestService() {
+        // register jersey's multipart feature - required for file upload
+        register(MultiPartFeature.class);
+        // other
+        register(AuthRole.class);
+        register(ProductRESTEndpoint.class);
+    }
 }

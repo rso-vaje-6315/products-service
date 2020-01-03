@@ -2,6 +2,7 @@ package si.rso.products.services;
 
 import si.rso.products.lib.Product;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductService {
@@ -15,4 +16,6 @@ public interface ProductService {
     Product updateProduct(Product product);
 
     Product deleteProduct(String productId);
+
+    void updateImage(String productId, byte[] imageBytes, String mimeType) throws IOException;
 }

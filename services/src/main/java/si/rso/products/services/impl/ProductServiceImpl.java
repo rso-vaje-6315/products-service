@@ -7,6 +7,7 @@ import si.rso.products.mappers.ProductMapper;
 import si.rso.products.persistence.ProductEntity;
 import si.rso.products.services.CategoryService;
 import si.rso.products.services.ProductService;
+import si.rso.products.services.StorageConnection;
 import si.rso.rest.exceptions.NotFoundException;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -15,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Inject
     private CategoryService categoryService;
+
+    @Inject
+    private StorageConnection storageConnection;
 
     @Override
     public List<Product> getProducts() {
@@ -87,5 +92,10 @@ public class ProductServiceImpl implements ProductService {
         em.remove(productEntity);
 
         return ProductMapper.fromProductEntity(productEntity);
+    }
+
+    @Override
+    public void updateImage(String productId, byte[] imageBytes, String mimeType) throws IOException {
+        storageConnection.uploadFile(productId, imageBytes, mimeType);
     }
 }

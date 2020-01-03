@@ -58,3 +58,7 @@ kumuluzee:
     ui:
       mapping: /graphiql
       enabled: true
+google:
+  storage:
+    url: https://storage.googleapis.com
+    bucket-name: rso-vaje-bucket

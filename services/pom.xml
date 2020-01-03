@@ -58,6 +58,10 @@
             <groupId>si.rso.rest</groupId>
             <artifactId>rest-utils</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-storage</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
