@@ -3,6 +3,9 @@ package si.rso.products.api.endpoints;
 import com.kumuluz.ee.security.annotations.Secure;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import si.rso.products.api.config.AuthRole;
@@ -27,6 +30,9 @@ public class ProductRESTEndpoint {
     private ProductService productService;
 
     @PUT
+    @Timeout(value = 3000)
+    @Retry
+    @Timed(name = "image_upload_method")
     @Path("/image/{productId}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RolesAllowed({AuthRole.ADMIN, AuthRole.SELLER})

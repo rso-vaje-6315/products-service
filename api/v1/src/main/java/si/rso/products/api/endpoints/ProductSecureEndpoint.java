@@ -4,6 +4,8 @@ import com.kumuluz.ee.graphql.annotations.GraphQLClass;
 import com.kumuluz.ee.security.annotations.Secure;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import si.rso.products.api.config.AuthRole;
 import si.rso.products.lib.Product;
 import si.rso.products.services.ProductService;
@@ -21,18 +23,24 @@ public class ProductSecureEndpoint {
     private ProductService productService;
 
     @RolesAllowed({AuthRole.ADMIN, AuthRole.SELLER})
+    @Timeout
+    @Retry
     @GraphQLMutation
     public Product createProduct(@GraphQLArgument(name = "product") Product product) {
         return productService.createProduct(product);
     }
 
     @RolesAllowed({AuthRole.ADMIN, AuthRole.SELLER})
+    @Timeout
+    @Retry
     @GraphQLMutation
     public Product updateProduct(@GraphQLArgument(name = "product") Product product) {
         return productService.updateProduct(product);
     }
 
     @RolesAllowed({AuthRole.ADMIN, AuthRole.SELLER})
+    @Timeout
+    @Retry
     @GraphQLMutation
     public Product deleteProduct(@GraphQLArgument(name = "productId") String productId) {
         return productService.deleteProduct(productId);
