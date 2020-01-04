@@ -71,24 +71,30 @@
             <artifactId>kumuluzee-openapi-ui</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-jetty94-adapter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>si.rso.rest</groupId>
-            <artifactId>rest-utils</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-multipart</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.kumuluz.ee.config</groupId>
             <artifactId>kumuluzee-config-mp</artifactId>
         </dependency>
         <dependency>
             <groupId>com.kumuluz.ee.metrics</groupId>
             <artifactId>kumuluzee-metrics-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kumuluz.ee.discovery</groupId>
+            <artifactId>kumuluzee-discovery-consul</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-jetty94-adapter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>si.rso.rest</groupId>
+            <artifactId>rest-utils</artifactId>
         </dependency>
     </dependencies>
 
