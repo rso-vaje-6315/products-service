@@ -56,8 +56,8 @@ kumuluzee:
   datasources:
     - jndi-name: jdbc/mainDB
       connection-url: jdbc:postgresql://localhost:5432/products-service
-      username: not_set
-      password: not_set
+      username: postgres
+      password: postgres
       pool:
         max-size: 20
   security:
