@@ -1,5 +1,7 @@
 package si.rso.products.services.impl;
 
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import si.rso.products.lib.Category;
 import si.rso.products.lib.Product;
 import si.rso.products.mappers.CategoryMapper;
@@ -32,6 +34,8 @@ public class ProductServiceImpl implements ProductService {
     @Inject
     private StorageConnection storageConnection;
 
+    @CircuitBreaker
+    @Timeout
     @Override
     public List<Product> getProducts() {
         TypedQuery<ProductEntity> query = em.createNamedQuery(ProductEntity.FIND_ALL, ProductEntity.class);
@@ -41,6 +45,8 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
+    @CircuitBreaker
+    @Timeout
     @Override
     public Product getProduct(String productId) {
         ProductEntity productEntity = em.find(ProductEntity.class, productId);
@@ -51,6 +57,8 @@ public class ProductServiceImpl implements ProductService {
         return ProductMapper.fromProductEntity(productEntity);
     }
 
+    @CircuitBreaker
+    @Timeout
     @Override
     @Transactional
     public Product createProduct(Product product) {
@@ -64,6 +72,8 @@ public class ProductServiceImpl implements ProductService {
         return ProductMapper.fromProductEntity(productEntity);
     }
 
+    @CircuitBreaker
+    @Timeout
     @Override
     @Transactional
     public Product updateProduct(Product product) {
@@ -82,6 +92,8 @@ public class ProductServiceImpl implements ProductService {
         return ProductMapper.fromProductEntity(updated);
     }
 
+    @CircuitBreaker
+    @Timeout
     @Override
     @Transactional
     public Product deleteProduct(String productId) {
@@ -94,6 +106,8 @@ public class ProductServiceImpl implements ProductService {
         return ProductMapper.fromProductEntity(productEntity);
     }
 
+    @CircuitBreaker
+    @Timeout
     @Override
     public void updateImage(String productId, byte[] imageBytes, String mimeType) throws IOException {
         storageConnection.uploadFile(productId, imageBytes, mimeType);

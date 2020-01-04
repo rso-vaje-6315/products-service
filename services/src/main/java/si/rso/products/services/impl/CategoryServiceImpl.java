@@ -1,5 +1,7 @@
 package si.rso.products.services.impl;
 
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import si.rso.products.lib.Category;
 import si.rso.products.mappers.CategoryMapper;
 import si.rso.products.persistence.CategoryEntity;
@@ -20,6 +22,8 @@ public class CategoryServiceImpl implements CategoryService {
     @PersistenceContext(unitName = "main-jpa-unit")
     private EntityManager em;
 
+    @CircuitBreaker
+    @Timeout
     @Override
     public List<Category> getCategories() {
         TypedQuery<CategoryEntity> query = em.createNamedQuery(CategoryEntity.FIND_ALL, CategoryEntity.class);
@@ -29,6 +33,8 @@ public class CategoryServiceImpl implements CategoryService {
                 .collect(Collectors.toList());
     }
 
+    @CircuitBreaker
+    @Timeout
     @Override
     public Category getCategory(String categoryId) {
         CategoryEntity categoryEntity = em.find(CategoryEntity.class, categoryId);
@@ -39,6 +45,8 @@ public class CategoryServiceImpl implements CategoryService {
         return CategoryMapper.fromCategoryEntity(categoryEntity);
     }
 
+    @CircuitBreaker
+    @Timeout
     @Override
     @Transactional
     public Category createCategory(Category category) {
@@ -52,6 +60,8 @@ public class CategoryServiceImpl implements CategoryService {
         return CategoryMapper.fromCategoryEntity(categoryEntity);
     }
 
+    @CircuitBreaker
+    @Timeout
     @Override
     @Transactional
     public Category updateCategory(Category category) {
@@ -67,6 +77,8 @@ public class CategoryServiceImpl implements CategoryService {
         return CategoryMapper.fromCategoryEntity(updated);
     }
 
+    @CircuitBreaker
+    @Timeout
     @Override
     @Transactional
     public Category deleteCategory(String categoryId) {

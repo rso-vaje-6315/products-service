@@ -1,10 +1,9 @@
 package si.rso.products.api.endpoints;
 
 import com.kumuluz.ee.graphql.annotations.GraphQLClass;
+import com.kumuluz.ee.logs.cdi.Log;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLQuery;
-import org.eclipse.microprofile.faulttolerance.Retry;
-import org.eclipse.microprofile.faulttolerance.Timeout;
 import si.rso.products.lib.Category;
 import si.rso.products.services.CategoryService;
 
@@ -12,6 +11,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.util.List;
 
+@Log
 @RequestScoped
 @GraphQLClass
 public class CategoryEndpoint {
@@ -20,15 +20,11 @@ public class CategoryEndpoint {
     private CategoryService categoryService;
 
     @GraphQLQuery
-    @Timeout
-    @Retry
     public List<Category> getAllCategories() {
         return categoryService.getCategories();
     }
 
     @GraphQLQuery
-    @Timeout
-    @Retry
     public Category getCategory(@GraphQLArgument(name = "categoryId") String categoryId) {
         return categoryService.getCategory(categoryId);
     }
