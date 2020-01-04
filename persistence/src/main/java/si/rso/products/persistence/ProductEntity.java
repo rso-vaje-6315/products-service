@@ -16,6 +16,8 @@ public class ProductEntity extends BaseEntity {
     public static final String FIND_ALL = "ProductEntity.findAll";
     public static final String FIND_BY_CATEGORY = "ProductEntity.findByCategory";
 
+    private String code;
+
     private String name;
 
     private String description;
@@ -31,6 +33,14 @@ public class ProductEntity extends BaseEntity {
 
     @Column(name = "image_path")
     private String imagePath;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getName() {
         return name;

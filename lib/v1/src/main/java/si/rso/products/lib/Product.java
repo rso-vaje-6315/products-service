@@ -2,6 +2,8 @@ package si.rso.products.lib;
 
 public class Product extends BaseType {
 
+    private String code;
+
     private String name;
 
     private String description;
@@ -13,6 +15,14 @@ public class Product extends BaseType {
     private Category category;
 
     private String imagePath;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getName() {
         return name;
