@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import si.rso.products.api.config.AuthRole;
-import si.rso.products.api.endpoints.ProductRESTEndpoint;
+import si.rso.products.api.endpoints.ProductRESTSecureEndpoint;
 
 import javax.annotation.security.DeclareRoles;
 import javax.ws.rs.ApplicationPath;
@@ -24,6 +24,6 @@ public class RestService extends ResourceConfig {
         register(MultiPartFeature.class);
         // other
         register(AuthRole.class);
-        register(ProductRESTEndpoint.class);
+        register(ProductRESTSecureEndpoint.class);
     }
 }

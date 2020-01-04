@@ -67,10 +67,6 @@ kumuluzee:
                "public-client": true,
                "confidential-port": 0
              }'
-      realm: rso
-      auth-server-url: https://keycloak.mjamsek.com/auth
-      client-id: products-service
-      client-secret: not_set
   graphql:
     ui:
       mapping: /graphiql
