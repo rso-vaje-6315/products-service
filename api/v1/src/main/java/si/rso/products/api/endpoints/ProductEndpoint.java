@@ -1,6 +1,7 @@
 package si.rso.products.api.endpoints;
 
 import com.kumuluz.ee.graphql.annotations.GraphQLClass;
+import com.kumuluz.ee.graphql.classes.Filter;
 import com.kumuluz.ee.logs.cdi.Log;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLQuery;
@@ -15,15 +16,15 @@ import java.util.List;
 @RequestScoped
 @GraphQLClass
 public class ProductEndpoint {
-
+    
     @Inject
     private ProductService productService;
-
+    
     @GraphQLQuery
-    public List<Product> getAllProducts() {
-        return productService.getProducts();
+    public List<Product> getAllProducts(@GraphQLArgument(name = "filters") Filter filter) {
+        return productService.getProducts(filter);
     }
-
+    
     @GraphQLQuery
     public Product getProduct(@GraphQLArgument(name = "productId") String productId) {
         return productService.getProduct(productId);

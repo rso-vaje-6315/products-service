@@ -1,5 +1,6 @@
 package si.rso.products.services;
 
+import com.kumuluz.ee.graphql.classes.Filter;
 import si.rso.products.lib.Product;
 
 import java.io.IOException;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProducts();
+    List<Product> getProducts(Filter filter);
 
     Product getProduct(String productId);
 

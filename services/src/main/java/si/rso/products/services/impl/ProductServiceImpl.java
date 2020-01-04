@@ -1,5 +1,7 @@
 package si.rso.products.services.impl;
 
+import com.kumuluz.ee.graphql.classes.Filter;
+import com.kumuluz.ee.graphql.utils.GraphQLUtils;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Timeout;
 import si.rso.products.lib.Category;
@@ -24,39 +26,38 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ProductServiceImpl implements ProductService {
-
+    
     @PersistenceContext(unitName = "main-jpa-unit")
     private EntityManager em;
-
+    
     @Inject
     private CategoryService categoryService;
-
+    
     @Inject
     private StorageConnection storageConnection;
-
+    
     @CircuitBreaker
     @Timeout
     @Override
-    public List<Product> getProducts() {
-        TypedQuery<ProductEntity> query = em.createNamedQuery(ProductEntity.FIND_ALL, ProductEntity.class);
-
-        return query.getResultStream()
-                .map(ProductMapper::fromProductEntity)
-                .collect(Collectors.toList());
+    public List<Product> getProducts(Filter filter) {
+        return GraphQLUtils.processWithoutPagination(em, ProductEntity.class, filter)
+            .stream()
+            .map(ProductMapper::fromProductEntity)
+            .collect(Collectors.toList());
     }
-
+    
     @CircuitBreaker
     @Timeout
     @Override
     public Product getProduct(String productId) {
         ProductEntity productEntity = em.find(ProductEntity.class, productId);
-
+        
         if (productEntity == null) {
             throw new NotFoundException(ProductEntity.class, productId);
         }
         return ProductMapper.fromProductEntity(productEntity);
     }
-
+    
     @CircuitBreaker
     @Timeout
     @Override
@@ -64,14 +65,14 @@ public class ProductServiceImpl implements ProductService {
     public Product createProduct(Product product) {
         Category categoryOfProduct = categoryService.getCategory(product.getCategory().getId());
         product.setCategory(categoryOfProduct);
-
+        
         ProductEntity productEntity = ProductMapper.toProductEntity(product);
-
+        
         em.persist(productEntity);
-
+        
         return ProductMapper.fromProductEntity(productEntity);
     }
-
+    
     @CircuitBreaker
     @Timeout
     @Override
@@ -86,12 +87,12 @@ public class ProductServiceImpl implements ProductService {
         old.setPrice(product.getPrice());
         old.setVisible(product.isVisible());
         old.setCategory(CategoryMapper.toCategoryEntity(categoryService.getCategory(product.getCategory().getId())));
-
+        
         ProductEntity updated = em.merge(old);
-
+        
         return ProductMapper.fromProductEntity(updated);
     }
-
+    
     @CircuitBreaker
     @Timeout
     @Override
@@ -102,10 +103,10 @@ public class ProductServiceImpl implements ProductService {
             throw new NotFoundException(ProductEntity.class, productId);
         }
         em.remove(productEntity);
-
+        
         return ProductMapper.fromProductEntity(productEntity);
     }
-
+    
     @CircuitBreaker
     @Timeout
     @Override
