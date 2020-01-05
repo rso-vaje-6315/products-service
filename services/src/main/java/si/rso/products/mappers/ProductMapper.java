@@ -22,6 +22,7 @@ public class ProductMapper {
     public static ProductEntity toProductEntity(Product product) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setId(product.getId());
+        productEntity.setCode(product.getCode());
         productEntity.setTimestamp(product.getTimestamp());
         productEntity.setName(product.getName());
         productEntity.setDescription(product.getDescription());
