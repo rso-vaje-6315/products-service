@@ -14,6 +14,7 @@ public class ProductMapper {
         product.setDescription(entity.getDescription());
         product.setPrice(entity.getPrice());
         product.setVisible(entity.isVisible());
+        product.setImagePath(entity.getImagePath());
         product.setCategory(CategoryMapper.fromCategoryEntity(entity.getCategory()));
 
         return product;
@@ -21,9 +22,7 @@ public class ProductMapper {
 
     public static ProductEntity toProductEntity(Product product) {
         ProductEntity productEntity = new ProductEntity();
-        productEntity.setId(product.getId());
         productEntity.setCode(product.getCode());
-        productEntity.setTimestamp(product.getTimestamp());
         productEntity.setName(product.getName());
         productEntity.setDescription(product.getDescription());
         productEntity.setPrice(product.getPrice());
