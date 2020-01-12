@@ -2,6 +2,8 @@ package si.rso.products.services.impl;
 
 import com.kumuluz.ee.graphql.classes.Filter;
 import com.kumuluz.ee.graphql.utils.GraphQLUtils;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Timeout;
 import si.rso.products.lib.Category;
@@ -34,6 +36,19 @@ public class ProductServiceImpl implements ProductService {
     
     @Inject
     private StorageConnection storageConnection;
+    
+    @Override
+    public List<Product> queryProducts(QueryParameters queryParameters) {
+        return JPAUtils.queryEntities(em, ProductEntity.class, queryParameters)
+            .stream()
+            .map(ProductMapper::fromProductEntity)
+            .collect(Collectors.toList());
+    }
+    
+    @Override
+    public long queryProductsCount(QueryParameters queryParameters) {
+        return JPAUtils.queryEntitiesCount(em, ProductEntity.class, queryParameters);
+    }
     
     @CircuitBreaker
     @Timeout
